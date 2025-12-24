@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷森 - UI设计师作品集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Alibaba PuHuiTi', 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #1e2127;
+            color: #7b88a1;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 顶部横幅 */
+        .hero {
+            height: 300px;
+            background-image: url('hero-bg.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+            background-color: #191c22;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: transparent;
+            border-radius: 50%;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            padding: 0 60px 80px;
+        }
+
+        /* Portfolio 标题 */
+        .portfolio-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 60px 0 40px 0;
+            padding: 0;
+        }
+
+        /* About Me 区域 */
+        .about-section {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            margin-top: 80px;
+            align-items: flex-start;
+        }
+
+        .avatar-container {
+            flex-shrink: 0;
+        }
+
+        .avatar {
+            width: 240px;
+            height: 240px;
+            border-radius: 12px;
+            background-image: url('avatar.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0;
+            color: transparent;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-title {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-name {
+            font-size: 28px;
+            font-weight: 600;
+            color: #d8dee9;
+            margin-bottom: 16px;
+        }
+
+        .about-description {
+            font-size: 16px;
+            color: #d8dee9;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        .contact-item i {
+            font-size: 16px;
+            width: 18px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-label {
+            margin-right: 4px;
+            font-weight: 400;
+        }
+
+        .contact-separator {
+            width: 1px;
+            height: 16px;
+            background-color: rgba(0,0,0,0.1);
+            margin: 0 4px;
+        }
+
+        .contact-value {
+            font-weight: 400;
+        }
+
+        .contact-item.phone {
+            background: #272c36;
+            color: #88c0d0;
+        }
+
+        .contact-item.email {
+            background: #272c36;
+            color: #88c0d0;
+        }
+
+        .contact-item.location {
+            background: #272c36;
+            color: #88c0d0;
+        }
+
+        .contact-item.wechat {
+            background: #272c36;
+            color: #88c0d0;
+        }
+
+        /* Section 样式 */
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .section-icon {
+            font-size: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #d8dee9;
+        }
+
+        /* 技能工具网格 */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .tool-item {
+            background: #272c36;
+            border: 1px solid #272c36;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-item:hover {
+            background: #333;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+
+        .tool-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .tool-name {
+            font-size: 14px;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        /* 工作经历 */
+        .career-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .career-item {
+            background: #272c36;
+            border: 1px solid #272c36;
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .career-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .career-time {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .career-company {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .career-description {
+            color: #b0b0b0;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* 作品展示 */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .work-card {
+            background: #272c36;
+            border: 1px solid #272c36;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .work-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+        }
+
+        .work-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .work-content {
+            padding: 20px;
+        }
+
+        .work-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .work-description {
+            font-size: 14px;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        /* 体验分析列表 */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .analysis-item {
+            background: #272c36;
+            border: 1px solid #272c36;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .analysis-item:hover {
+            border-color: #667eea;
+            background: #2f2f2f;
+        }
+
+        .analysis-number {
+            font-size: 16px;
+            font-weight: 600;
+            color: #667eea;
+            flex-shrink: 0;
+        }
+
+        .analysis-text {
+            font-size: 15px;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* 底部联系方式 */
+        .footer {
+            padding: 80px 0 160px;
+            border-top: 1px solid #272c36;
+        }
+
+        .footer-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .footer-logo-image {
+            width: 140px;
+            height: auto;
+            display: block;
+        }
+
+        .footer-content-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .footer-title {
+            font-size: 28px;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .footer-contacts {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact {
+            color: #e0e0e0;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .footer-contact:hover {
+            color: #67e8a9;
+            transform: scale(1.05);
+        }
+
+        .footer-contact i {
+            margin-right: 12px;
+        }
+
+        /* 复制提示框样式 */
+        .copy-tooltip {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .copy-tooltip.show {
+            opacity: 1;
+        }
+
+        /* 微信二维码弹窗样式 */
+        .qr-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .qr-modal-content {
+            background-color: #1e2127;
+            padding: 25px;
+            border: 1px solid #272c36;
+            border-radius: 8px;
+            width: 380px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .qr-modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+
+        .qr-modal-close:hover {
+            color: #d8dee9;
+        }
+
+        .qr-code-image {
+            width: 360px;
+            height: 360px;
+            margin: 10px auto 15px;
+            display: block;
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 80vh;
+        }
+
+        .qr-modal-content p {
+            color: #d8dee9;
+            margin: 8px 0 16px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .qr-modal-content .qr-description {
+            display: none;
+        }
+
+        .footer-contact-separator {
+            color: #555;
+        }
+
+        .footer-contact:hover {
+            color: #67e8a9;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0 20px 60px;
+            }
+
+            .portfolio-title {
+                margin-left: 20px;
+                font-size: 32px;
+            }
+
+            .about-section {
+                flex-direction: column;
+            }
+
+            .contact-item {
+                padding: 6px 14px;
+                font-size: 14px;
+            }
+
+            .contact-item i {
+                font-size: 15px;
+                width: 16px;
+            }
+
+            .contact-separator {
+                margin: 0 4px;
+                height: 14px;
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-content-box {
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-contacts {
+                justify-content: center;
+                gap: 16px;
+            }
+        }
+
+        /* 打印样式 */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .hero {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部横幅 -->
+    <div class="hero"></div>
+
+    <div class="container">
+        <div class="main-content">
+            <!-- About Me 区域 -->
+            <section class="about-section">
+                <div class="avatar-container">
+                    <div class="avatar">雷森</div>
+                </div>
+                <div class="about-content">
+                    <div class="about-title">About me</div>
+                    <h2 class="about-name">Hi, 这里是雷森的个人作品集</h2>
+                    <p class="about-description">
+                        我是一名专注于 UI/UX 设计的设计师,擅长设计、原型制作、用户研究及交互设计。具有30多个项目经验,擅长 B 端产品和 C 端产品设计。UI/UX 设计证书持有者,曾参与多个大型项目的视觉设计与用户体验优化工作。
+                    </p>
+                    <div class="contact-info">
+                        <div class="contact-item location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="contact-label">地址</span>
+                            <span class="contact-separator"></span>
+                            <span class="contact-value">广东广州</span>
+                        </div>
+                        <div class="contact-item wechat" title="点击显示微信二维码">
+                            <i class="fab fa-weixin"></i>
+                            <span class="contact-label">微信</span>
+                            <span class="contact-separator"></span>
+                            <span class="contact-value">RaysonDee</span>
+                        </div>
+                        <div class="contact-item phone" data-copy="185 2028 2775" title="点击复制手机号码">
+                            <i class="fas fa-phone"></i>
+                            <span class="contact-label">手机</span>
+                            <span class="contact-separator"></span>
+                            <span class="contact-value">185 2028 2775</span>
+                        </div>
+                        <div class="contact-item email" data-copy="2276418112@qq.com" title="点击复制邮箱地址">
+                            <i class="fas fa-envelope"></i>
+                            <span class="contact-label">邮箱</span>
+                            <span class="contact-separator"></span>
+                            <span class="contact-value">2276418112@qq.com</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 工作技能工具 -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-icon">🛠️</span>
+                    <h2 class="section-title">工作技能</h2>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">🎨</div>
+                        <div class="tool-name">Figma</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🖼️</div>
+                        <div class="tool-name">Photoshop</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">✨</div>
+                        <div class="tool-name">Protopie</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">💻</div>
+                        <div class="tool-name">Azure</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">📦</div>
+                        <div class="tool-name">Sketch</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🎯</div>
+                        <div class="tool-name">Adobe XD</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🖌️</div>
+                        <div class="tool-name">Illustrator</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">👍</div>
+                        <div class="tool-name">Axure</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 工作经历 -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-icon">💼</span>
+                    <h2 class="section-title">工作经历</h2>
+                </div>
+                <div class="career-list">
+                    <div class="career-item">
+                        <div class="career-time">2021.10 - 至今</div>
+                        <div class="career-company">广州燥起来互联网科技有限公司</div>
+                        <div class="career-description">
+                            担任前端工程师,负责公司核心产品的 UI/UX 设计、原型制作、用户研究和交互设计。参与了公司多个重要项目的设计工作,包括 B 端产品和 C 端产品的视觉设计与体验优化。通过 A/B 测试与数据分析,持续优化产品体验。
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-time">2019.06 - 2021.09</div>
+                        <div class="career-company">XX 设计咨询公司</div>
+                        <div class="career-description">
+                            担任 UI 设计师,负责多个客户项目的界面设计、视觉规范制定、设计系统搭建。主导设计了多个APP和Web页面,提升了用户流畅度和产品使用满意度。协同产品经理和开发团队,保证设计稿高质量落地。
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-time">2017.03 - 2019.05</div>
+                        <div class="career-company">XX 科技有限公司</div>
+                        <div class="career-description">
+                            担任初级 UI 设计师,参与公司移动端 App 和小程序的界面设计工作。学习并掌握了 UI/UX 设计核心方法论,积累了丰富的设计经验和用户研究能力。
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- C端产品设计 -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-icon">📱</span>
+                    <h2 class="section-title">C端产品设计</h2>
+                </div>
+                <div class="works-grid">
+                    <div class="work-card">
+                        <div class="work-image">📱</div>
+                        <div class="work-content">
+                            <div class="work-title">👍 Fa米家 移动应用</div>
+                            <div class="work-description">一款为家庭用户设计的移动应用,提供 UI/UX 设计服务</div>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <div class="work-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🎉</div>
+                        <div class="work-content">
+                            <div class="work-title">🎉 日历移动应用</div>
+                            <div class="work-description">简洁好用的日历 App 设计</div>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <div class="work-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🚀</div>
+                        <div class="work-content">
+                            <div class="work-title">🚀 MARS APP</div>
+                            <div class="work-description">星球主题的创新移动应用设计</div>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <div class="work-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">🎬</div>
+                        <div class="work-content">
+                            <div class="work-title">🎬 DJI Mavic 3 Pro 官网设计</div>
+                            <div class="work-description">专业无人机产品官网设计</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- B端产品设计 -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-icon">💻</span>
+                    <h2 class="section-title">B端产品设计</h2>
+                </div>
+                <div class="works-grid">
+                    <div class="work-card">
+                        <div class="work-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🛠️</div>
+                        <div class="work-content">
+                            <div class="work-title">🛠️ 企业 ERP 系统设计</div>
+                            <div class="work-description">为企业提供全面的资源管理系统设计</div>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <div class="work-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">📊</div>
+                        <div class="work-content">
+                            <div class="work-title">📊 主数据平台系统设计</div>
+                            <div class="work-description">数据可视化平台,提供实时数据分析能力</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 体验分析 -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-icon">📝</span>
+                    <h2 class="section-title">体验分析</h2>
+                </div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <div class="analysis-number">01</div>
+                        <div class="analysis-text">✅ Steam 宣传站体验</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-number">02</div>
+                        <div class="analysis-text">🟡 高德导航站体验分析</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-number">03</div>
+                        <div class="analysis-text">❤️ 小红书女性社区产品体验分析</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-number">04</div>
+                        <div class="analysis-text">🟢 计算器应用产品体验分析</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-number">05</div>
+                        <div class="analysis-text">⚪️ 腾讯产品产品体验分析案例集</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 底部 -->
+        <footer class="footer">
+            <div class="footer-inner">
+                <div class="footer-logo">
+                    <!-- 请将尾页图标图片保存为 contact-logo.png 放在 resume 目录下 -->
+                    <img src="contact-logo.png" alt="联系图标" class="footer-logo-image">
+                </div>
+                <div class="footer-content-box">
+                    <h2 class="footer-title">欢迎与我联系~</h2>
+                    <div class="footer-contacts">
+                        <span class="footer-contact" data-copy="185 2028 2775" title="点击复制电话号码">
+                            <i class="fas fa-phone"></i>185 2028 2775
+                        </span>
+                        <span class="footer-contact footer-contact-separator">|</span>
+                        <span class="footer-contact" data-copy="2276418112@qq.com" title="点击复制邮箱地址">
+                            <i class="fas fa-envelope"></i>2276418112@qq.com
+                        </span>
+                        <span class="footer-contact footer-contact-separator">|</span>
+                        <span class="footer-contact wechat" data-copy="RaysonDee" title="点击显示微信二维码">
+                            <i class="fab fa-weixin"></i>RaysonDee
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- 复制提示框 -->
+    <div class="copy-tooltip" id="copyTooltip">✔ 已复制</div>
+    <script>
+        // 实现点击复制功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取提示框元素
+            const tooltip = document.getElementById('copyTooltip');
+                    
+            // 获取所有联系方式元素（包括带data-copy的和微信类的）
+            const contactElements = document.querySelectorAll('[data-copy], .contact-item.wechat, .footer-contact.wechat');
+                    
+            // 为每个元素添加点击事件监听器
+            contactElements.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    // 检查是否是微信联系方式，如果是则显示二维码而不是复制
+                    const isWechat = element.classList.contains('wechat') && 
+                                   (element.classList.contains('contact-item') || element.classList.contains('footer-contact'));
+                            
+                    if (isWechat) {
+                        const modal = document.getElementById('wechatQrModal');
+                        modal.style.display = 'block';
+                        return;
+                    }
+                            
+                    // 对于非微信联系方式，执行复制功能
+                    // 获取要复制的文本
+                    const textToCopy = element.getAttribute('data-copy');
+                            
+                    // 如果没有data-copy属性，则不执行复制
+                    if (!textToCopy) {
+                        return;
+                    }
+                            
+                    // 创建临时textarea元素用于复制
+                    const textarea = document.createElement('textarea');
+                    textarea.value = textToCopy;
+                    document.body.appendChild(textarea);
+                            
+                    // 选择文本并复制
+                    textarea.select();
+                    document.execCommand('copy');
+                            
+                    // 移除临时元素
+                    document.body.removeChild(textarea);
+                            
+                    // 显示提示框
+                    tooltip.classList.add('show');
+                            
+                    // 2秒后隐藏提示框
+                    setTimeout(function() {
+                        tooltip.classList.remove('show');
+                    }, 2000);
+                });
+            });
+                    
+            // 添加关闭二维码弹窗的功能
+            const modal = document.getElementById('wechatQrModal');
+            const span = document.querySelector('.qr-modal-close');
+                    
+            // 点击关闭按钮时关闭弹窗
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+                    
+            // 点击弹窗外部区域时关闭弹窗
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        });
+    </script>
+    <!-- 微信二维码弹窗 -->
+    <div id="wechatQrModal" class="qr-modal">
+        <div class="qr-modal-content">
+            <span class="qr-modal-close">&times;</span>
+            <p>请使用微信扫描二维码</p>
+            <img src="wechat-qr-code.png" alt="微信二维码" class="qr-code-image">
+        </div>
+    </div>
+</body>
+</html>
